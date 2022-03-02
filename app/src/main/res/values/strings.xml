@@ -8,6 +8,8 @@
     <string name="tv_author">Autor(es)</string>
     <string name="tv_editorial">Editorial</string>
     <string name="tv_year">Año</string>
+    <string name="tv_price">Precio $</string>
+    <string name="spn_category">Categoría</string>
     // images
     <string name="iv_cover_page">Imagen de portada del elemento</string>
     // button

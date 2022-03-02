@@ -4,18 +4,14 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import kotlinx.android.synthetic.main.activity_book_form.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.android.synthetic.main.activity_book_form.tv_form_title
-import kotlinx.android.synthetic.main.activity_book_form.tv_form_author
-import kotlinx.android.synthetic.main.activity_book_form.tv_form_editorial
-import kotlinx.android.synthetic.main.activity_book_form.tv_form_year
-import kotlinx.android.synthetic.main.activity_book_form.btn_upload
-import kotlinx.android.synthetic.main.activity_book_form.btn_form_add_edit
-import kotlinx.android.synthetic.main.activity_book_form.iv_form_book
 
 class BookFormActivity : AppCompatActivity() {
     private lateinit var database:BookDB
@@ -33,6 +29,8 @@ class BookFormActivity : AppCompatActivity() {
         setContentView(R.layout.activity_book_form)
 
         database = BookDB.getDatabase(this)
+
+        spinnerController()
 
         val idBook = getBook()
 
@@ -54,6 +52,12 @@ class BookFormActivity : AppCompatActivity() {
         }
     }
 
+    private fun spinnerController() {
+        val spinner = findViewById<Spinner>(R.id.spn_form_category)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, Category.values())
+        spinner.adapter = adapter
+    }
+
     private fun getBook(): Int {
         val idBook = intent.getIntExtra("id", 0)
         if (idBook != 0) {
@@ -64,6 +68,8 @@ class BookFormActivity : AppCompatActivity() {
                 tv_form_author.setText(book.author)
                 tv_form_editorial.setText(book.editorial)
                 tv_form_year.setText(book.year.toString())
+                tv_form_price.setText(book.price.toString())
+                spn_form_category.setSelection(book.category.ordinal)
                 if (book.image != 0) {
                     val uriImage = ControllerImage.getUri(this, book.id.toLong())
                     iv_form_book.setImageURI(uriImage)
@@ -91,8 +97,10 @@ class BookFormActivity : AppCompatActivity() {
         val author = tv_form_author.text.toString()
         val editorial = tv_form_editorial.text.toString()
         val year = tv_form_year.text.toString()
+        val price = tv_form_price.text.toString()
+        val category = spn_form_category.selectedItem.toString()
 
-        val book = BookEntity(title, author, editorial, year.toInt(), R.drawable.ic_book_orange)
+        val book = BookEntity(title, author, editorial, year.toInt(), price.toDouble(), Category.valueOf(category), R.drawable.ic_book_orange)
         //val book = BookEntity("Programación Orientada a Objetos C++ y Java", "José Luis López Goytia y Ángel Gutiérrez González", "PATRIA", 2014, 0)
         CoroutineScope(Dispatchers.IO).launch {
             val id = database.getBookDao().insertNew(book)[0]
@@ -108,8 +116,10 @@ class BookFormActivity : AppCompatActivity() {
         val author = tv_form_author.text.toString()
         val editorial = tv_form_editorial.text.toString()
         val year = tv_form_year.text.toString()
+        val price = tv_form_price.text.toString()
+        val category = spn_form_category.selectedItem.toString()
 
-        val book = BookEntity(title, author, editorial, year.toInt(), R.drawable.ic_book_orange, id)
+        val book = BookEntity(title, author, editorial, year.toInt(), price.toDouble(), Category.valueOf(category), R.drawable.ic_book_orange, id)
         CoroutineScope(Dispatchers.IO).launch {
             database.getBookDao().update(book)
             uriImage?.let {

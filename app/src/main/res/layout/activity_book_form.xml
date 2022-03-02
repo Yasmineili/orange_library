@@ -6,6 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".BookFormActivity">
 
+    <EditText
+        android:id="@+id/tv_form_price"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="@string/tv_price"
+        android:importantForAutofill="no"
+        android:inputType="number|phone"
+        android:textColor="@color/text_light"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/tv_form_year"
+        app:layout_constraintTop_toBottomOf="@+id/tv_form_editorial"
+        tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="239dp"
@@ -26,18 +42,18 @@
     <EditText
         android:id="@+id/tv_form_title"
         android:layout_width="300dp"
-        android:layout_height="48dp"
+        android:layout_height="40dp"
         android:layout_marginStart="52dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="@string/tv_title"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:textColor="@color/text_light"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:ignore="TextContrastCheck"
-        android:importantForAutofill="no" />
+        tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
 
     <ImageView
         android:id="@+id/iv_form_book"
@@ -54,7 +70,7 @@
     <EditText
         android:id="@+id/tv_form_author"
         android:layout_width="300dp"
-        android:layout_height="48dp"
+        android:layout_height="40dp"
         android:layout_marginStart="52dp"
         android:layout_marginTop="14dp"
         android:ems="10"
@@ -64,27 +80,29 @@
         android:textColor="@color/text_light"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_form_title" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_form_title"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
         android:id="@+id/tv_form_year"
-        android:layout_width="300dp"
-        android:layout_height="48dp"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
         android:layout_marginStart="52dp"
         android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="@string/tv_year"
+        android:importantForAutofill="no"
         android:inputType="number|phone"
         android:textColor="@color/text_light"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_form_editorial"
-        android:importantForAutofill="no" />
+        tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
         android:id="@+id/tv_form_editorial"
         android:layout_width="300dp"
-        android:layout_height="48dp"
+        android:layout_height="40dp"
         android:layout_marginStart="52dp"
         android:layout_marginTop="12dp"
         android:ems="10"
@@ -94,17 +112,18 @@
         android:textColor="@color/text_light"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_form_author" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_form_author"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <Button
         android:id="@+id/btn_upload"
         android:layout_width="159dp"
         android:layout_height="50dp"
         android:layout_marginStart="124dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="20dp"
         android:text="@string/btn_upload_image"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_form_year"
+        app:layout_constraintTop_toBottomOf="@+id/spn_form_category"
         tools:ignore="TextContrastCheck" />
 
     <Button
@@ -119,4 +138,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="TextContrastCheck" />
+
+    <Spinner
+        android:id="@+id/spn_form_category"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="12dp"
+        android:contentDescription="@string/spn_category"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_form_year"
+        tools:ignore="TouchTargetSizeCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

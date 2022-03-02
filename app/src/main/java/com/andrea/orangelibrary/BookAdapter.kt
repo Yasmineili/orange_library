@@ -13,6 +13,9 @@ import kotlinx.coroutines.launch
 import kotlinx.android.synthetic.main.activity_book.view.iv_main_book
 import kotlinx.android.synthetic.main.activity_book.view.tv_main_title
 import kotlinx.android.synthetic.main.activity_book.view.btn_delete
+import kotlinx.android.synthetic.main.activity_book.view.tv_main_author
+import kotlinx.android.synthetic.main.activity_book.view.tv_main_editorial
+import kotlinx.android.synthetic.main.activity_book.view.tv_main_year
 
 class BookAdapter(private val mContext: Context, private val listBooks: List<BookEntity>):
     ArrayAdapter<BookEntity>(mContext, 0, listBooks) {
@@ -21,6 +24,9 @@ class BookAdapter(private val mContext: Context, private val listBooks: List<Boo
         val book = listBooks[position]
 
         layout.tv_main_title.text = book.title
+        layout.tv_main_author.text = book.author
+        layout.tv_main_editorial.text = book.editorial
+        layout.tv_main_year.text = book.year.toString()
         val uriImage = ControllerImage.getUri(context, book.id.toLong())
         layout.iv_main_book.setImageURI(uriImage)
 
@@ -30,7 +36,7 @@ class BookAdapter(private val mContext: Context, private val listBooks: List<Boo
                 .setPositiveButton("Sí", DialogInterface.OnClickListener {
                         dialog, id ->
                     val database = BookDB.getDatabase(mContext)
-                    val book = BookEntity(book.title, book.author, book.editorial, book.year, book.image, book.id)
+                    val book = BookEntity(book.title, book.author, book.editorial, book.year, book.price, book.category, book.image, book.id)
                     CoroutineScope(Dispatchers.IO).launch {
                         database.getBookDao().delete(book)
                         uriImage?.let {
