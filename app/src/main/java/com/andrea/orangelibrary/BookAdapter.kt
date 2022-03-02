@@ -36,7 +36,7 @@ class BookAdapter(private val mContext: Context, private val listBooks: List<Boo
                 .setPositiveButton("Sí", DialogInterface.OnClickListener {
                         dialog, id ->
                     val database = BookDB.getDatabase(mContext)
-                    val book = BookEntity(book.title, book.author, book.editorial, book.year, book.image, book.id)
+                    val book = BookEntity(book.title, book.author, book.editorial, book.year, book.price, book.category, book.image, book.id)
                     CoroutineScope(Dispatchers.IO).launch {
                         database.getBookDao().delete(book)
                         uriImage?.let {
